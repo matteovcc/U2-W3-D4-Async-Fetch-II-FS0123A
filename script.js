@@ -44,11 +44,14 @@
 // }
 
 
-  const apiKey = 'E0V1QuC2Ue8D0NECOPr4Syzhm8O960oaASyO2SLLM1ZOjb0WTAsOkrpp';
-  const apiUrl = 'https://api.pexels.com/v1/search?query=nature';
+//   
+
+  // Sostituisci 'your-api-key' con la tua chiave API di Pexels
+  const apiKey = "E0V1QuC2Ue8D0NECOPr4Syzhm8O960oaASyO2SLLM1ZOjb0WTAsOkrpp";
+  const apiUrl = "https://api.pexels.com/v1/search?query=landscape";
   
   const loadImagesButton = document.getElementById('loadImagesButton');
-  
+  const svgElement = document.getElementById('mySvg');
   
   loadImagesButton.addEventListener('click', (event) => {
     event.preventDefault();
@@ -75,19 +78,21 @@
   }
   
   function displayImages(photos) {
-    // imageContainer.innerHTML = '';
-    const svgElement = document.getElementById('mySvg');
-
     if (svgElement) {
       svgElement.remove();
     }
-  
+
     photos.forEach(photo => {
       const img = document.createElement('img');
       img.innerHTML = `
-      <img src="${photo.src.nature}" >
-  `
-      imageContainer.appendChild(img);
+        <img src="${photo.src.landscape}" class="img-fluid">
+      `
+
+      if (svgElement.parentElement) {
+        svgElement.parentElement.appendChild(img);
+      } else {
+        document.body.appendChild(img);
+      }
     });
   }
 
