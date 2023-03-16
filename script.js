@@ -1,25 +1,97 @@
-const url = "http://127.0.0.1:5500/Starting-template.html#"
-const API = "E0V1QuC2Ue8D0NECOPr4Syzhm8O960oaASyO2SLLM1ZOjb0WTAsOkrpp"
 
-async function fetchData() {
+
+//   const apiKey = 'E0V1QuC2Ue8D0NECOPr4Syzhm8O960oaASyO2SLLM1ZOjb0WTAsOkrpp';
+//   const apiUrl = 'https://api.pexels.com/v1/search?query=landscape';
+  
+//   const loadImagesButton = document.getElementById('loadImagesButton');
+//   const svgContainer = document.querySelectorAll(".bd-placeholder-img");
+//   loadImagesButton.addEventListener('click', (event) => {
+//     event.preventDefault();
+//     fetchImages();
+//   });
+  
+//   async function fetchImages() {
+//     try {
+//       const response = await fetch(apiUrl, {
+//         headers: {
+//           'Authorization': apiKey
+//         }
+//       });
+      
+//       if (response.ok) {
+//           const data = await response.json();
+//           console.log(data)
+//           displayImages(data.photos);
+//         } else {
+//             console.error('Errore nella richiesta:', response.statusText);
+//         }
+//     } catch (error) {
+//         console.error('Errore nel fetch:', error);
+//     }
+// }
+
+
+// function displayImages(photos) {
+//   svgContainer.innerHTML = '';
+
+//   photos.forEach(photo => {
+//     const img = document.createElement('img');
+//     img.innerHTML = `
+//       <img src="${photo.src.landscape}" >
+// `
+//     svgContainer.append(img);
+//   });
+// }
+
+
+  const apiKey = 'E0V1QuC2Ue8D0NECOPr4Syzhm8O960oaASyO2SLLM1ZOjb0WTAsOkrpp';
+  const apiUrl = 'https://api.pexels.com/v1/search?query=nature';
+  
+  const loadImagesButton = document.getElementById('loadImagesButton');
+  
+  
+  loadImagesButton.addEventListener('click', (event) => {
+    event.preventDefault();
+    fetchImages();
+  });
+  
+  async function fetchImages() {
     try {
-      const response = await fetch(url, {
-        method: "GET",
+      const response = await fetch(apiUrl, {
         headers: {
-          "Content-Type": "application/json",
-          "Authorization": API
+          'Authorization': apiKey
         }
       });
-  
-      if (!response.ok) {
-        throw new Error(`HTTP error! Status: ${response.status}`);
+      
+      if (response.ok) {
+        const data = await response.json();
+        displayImages(data.photos);
+      } else {
+        console.error('Errore nella richiesta:', response.statusText);
       }
-  
-      const data = await response.json();
-      console.log(data);
     } catch (error) {
-      console.log(error);
+      console.error('Errore nel fetch:', error);
     }
   }
   
-  fetchData();
+  function displayImages(photos) {
+    // imageContainer.innerHTML = '';
+    const svgElement = document.getElementById('mySvg');
+
+    if (svgElement) {
+      svgElement.remove();
+    }
+  
+    photos.forEach(photo => {
+      const img = document.createElement('img');
+      img.innerHTML = `
+      <img src="${photo.src.nature}" >
+  `
+      imageContainer.appendChild(img);
+    });
+  }
+
+    
+  
+
+
